@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet'>
+</head>
+<body>
+<div class="heading">
+    <h1>Rock, Paper, Scissors!</h1>>
+</div>
+
+<div class="buttons">
+    <button id="Rock">Choose Rock</button>
+    <button id="Paper">Choose Paper</button>
+    <button id="Scissors">Choose Scissors</button>
+</div>
+
+<div id="result">
+
+</div> 
+
+<div id="winner">
+
+
+</div>
+<script>
+
+
+    
+    function computerPlay() {
+        let randgen = Math.floor((Math.random()*3)+1);
+        if (randgen==1) {
+            return("Rock")
+        } else if (randgen==2) {
+            return("Paper")
+        } else if (randgen==3) {
+            return("Scissors")
+        }
+        
+    }
+   
+
+  
+    const computerSelection= computerPlay()
+
+
+    
+    function penta() {
+        let game1=game()
+        let game2=game()
+        let game3=game()
+        let game4=game()
+        let game5=game()
+
+        var output = [game1, game2, game3, game4, game5];
+        return(output) 
+    }
+
+
+
+
+    function playRound(player, computer) {
+        if (player=='Paper' && computer=='Rock') {
+           return("You beat the computer!")
+       } else if (player=='Rock' && computer=='Paper') {
+           return("You lost this round!")
+       } else if (player=='Scissors' && computer=='Paper') {
+           return ("You beat the computer!")
+       } else if (player=='Paper' && computer=='Scissors') {
+           return ("You lost this round!")
+       } else if (player=='Rock' && computer=='Scissors') {
+           return ("You beat the computer!")
+       } else if (player=='Scissors' && computer=='Rock') {
+           return("You lost this round!")
+       } else {
+           return ("Try again!")
+       }
+
+    }
+
+    var playerScore=0;
+    var computerScore=0;
+
+   const buttons= document.querySelectorAll('button')
+   buttons.forEach((button) => {
+       button.addEventListener('click', ()=> {
+           let play=button.id
+           let round= playRound(play, computerPlay())
+           document.getElementById('result').innerHTML=round
+           if (round=="You beat the computer!") {
+               playerScore++;
+           } else if (round=="You lost this round!") {
+               computerScore++;
+           }
+           if(playerScore%5==0&&playerScore!==0) {
+               document.getElementById('winner').innerHTML= "You beat the computer five times!"
+           } else if(computerScore%5==0&&computerScore!==0){
+               document.getElementById('winner').innerHTML="The computer beat you five times"
+           }
+       } )
+
+   })
